@@ -1,0 +1,51 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ],
+  "emulators": {
+    "functions": {
+      "host": "127.0.0.1",
+      "port": 5332
+    },
+    "ui": {
+      "host": "127.0.0.1",
+      "port": 5333
+    },
+    "logging": {
+      "host": "127.0.0.1",
+      "port": 4545
+    },
+    "hub": {
+      "host": "127.0.0.1",
+      "port": 4333
+    },
+    "eventarc": {
+      "host": "127.0.0.1",
+      "port": 5334
+    },
+    "hosting": {
+      "host": "127.0.0.1",
+      "port": 5000
+    },
+    "singleProjectMode": true
+  },
+  "singleProjectMode": true,
+  "hosting": {
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
