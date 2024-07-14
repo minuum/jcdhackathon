@@ -6,5 +6,8 @@
     "postgres": {
       "localConnectionString": "postgresql://localhost:5432?sslmode=disable"
     }
+  },
+  "github": {
+    "token": "your-personal-access-token"
   }
 }

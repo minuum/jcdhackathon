@@ -5,13 +5,17 @@ const os = require('os');
 const path = require('path');
 const fs = require('fs');
 const Busboy = require('busboy');
-const cors = require('cors')({ origin: true, credentials: true });
+const cors = require('cors');
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
-exports.analyzeImage = onRequest({ cors: true }, async (req, res) => {
-    // Wrap the function in cors middleware
-    return cors(req, res, async () => {
+exports.analyzeImage = onRequest({cors:["https://jocodinghackathon.web.app"]}, (req, res) => {
+    // Enable CORS using the 'cors' middleware
+    cors({
+        origin: 'https://jocodinghackathon.web.app',
+        methods: ['POST'],
+        credentials: true,
+    })(req, res, async () => {
         if (req.method !== 'POST') {
             return res.status(405).end();
         }
@@ -103,7 +107,7 @@ exports.analyzeImage = onRequest({ cors: true }, async (req, res) => {
                 {"reason": "The image resolution is too low to evaluate the person's appearance properly.", "score": 0}
                 
                 By clearly instructing the AI to avoid additional commentary and focus on a straightforward score and reason, the responses should become more direct and aligned with your requirements.`;
-        
+
                 const model = genAI.getGenerativeModel({
                     model: 'gemini-1.5-flash',
                     safetySetting: [
@@ -122,8 +126,6 @@ exports.analyzeImage = onRequest({ cors: true }, async (req, res) => {
                 
                 // Clean up the temporary file
                 fs.unlinkSync(tempFilePath);
-
-                console.log(text)
 
                 // Return the structured response
                 res.status(200).json(JSON.parse(text));
